@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&family=Roboto&display=swap");
+
+@mixin theme($theme: SubscribeButton) {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 8px;
+	position: static;
+	width: 232px;
+	height: 41px;
+	left: 728px;
+	top: 2.5px;
+	font-family: "IBM Plex Sans", sans-serif !important;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 175%;
+	letter-spacing: 0.1px;
+	background: #f2a52b;
+	border-radius: 4px;
+	border-style: unset;
+}
+.header__container {
+	display: flex;
+	align-items: center;
+	width: 80vw;
+	justify-content: space-between;
+	margin-top: 50.5px;
+
+	.header__page-title {
+		display: flex;
+		height: 41px;
+
+		.header__badger-status {
+			display: flex;
+			flex-wrap: wrap;
+			width: 155px;
+			justify-content: flex-start;
+			margin-left: 10px;
+
+			h1 {
+				position: static;
+				height: 30px;
+				width: 155px;
+				font-size: 24px;
+				font-family: "IBM Plex Sans", sans-serif;
+				font-style: normal;
+				font-weight: 500;
+				line-height: 123.5%;
+				color: #ffffff;
+				margin: 0;
+			}
+
+			a {
+				display: flex;
+				position: static;
+				color: #a9731e;
+				width: 100px;
+				height: 12px;
+				font-family: "IBM Plex Sans", sans-serif;
+				font-style: normal;
+				font-weight: 500;
+				font-size: 12px;
+				line-height: 100%;
+				text-decoration: underline;
+				margin-top: 5px;
+			}
+		}
+	}
+
+	.header__sub-button {
+		@include theme($theme: SubscribeButton);
+
+		.header__rss-feed-svg {
+			margin-right: 5px;
+		}
+	}
+}
