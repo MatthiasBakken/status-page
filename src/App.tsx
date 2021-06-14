@@ -10,17 +10,23 @@ import './styles/App.css';
 
 
 const initialState: IInitialState = {
+  id: "sdlkj3-sldfie-2489cs8-3sdfiK",
   status: "Resolved",
   title: "Degraded performance on Binance Smart Chain due to BSC nodes",
+  description: "The issue has been identified and a fix has been implemented.",
   events: [
     {
+      id: "sdlkj3-sldfie-2489cs8-3sdf3K",
       status: "Resolved",
-      title: "The issue has been identified and a fix has been implemented.",
+      title: "Degraded performance on Binance Smart Chain due to BSC nodes.",
+      description: "The issue has been identified and a fix has been implemented.",
       date: new Date(),
     },
     {
+      id: "sdlkj3-sldfie-2429cs8-3sPfiK",
       status: "Notice",
-      title: "Partial Outage on BSC node.",
+      title: "Degraded performance on Binance Smart Chain due to BSC nodes.",
+      description: "We encountered an issue",
       date: new Date(),
     }
   ]
