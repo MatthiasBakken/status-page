@@ -57,8 +57,8 @@ const Alert: React.FC<IProps> = (props) => {
     <div className={alertContainer} >
       <div className={`${ALERT}content`}>
         <span className={statusTitleContainer}>
-          <p>Resolved</p>
-          <h4>Degraded performance on Binance Smart Chain due to BSC nodes</h4>
+          <p>{`${alert.status}`}</p>
+          <h4>{`${alert.title}`}</h4>
         </span>
         <div className={`${ALERT}events-container`}>
           {
