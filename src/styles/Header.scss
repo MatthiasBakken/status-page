@@ -8,8 +8,6 @@
 	position: static;
 	width: 232px;
 	height: 41px;
-	left: 728px;
-	top: 2.5px;
 	font-family: "IBM Plex Sans", sans-serif !important;
 	font-style: normal;
 	font-weight: 500;
@@ -25,11 +23,16 @@
 	align-items: center;
 	width: 80vw;
 	justify-content: space-between;
-	margin-top: 50.5px;
+	margin: 50.5px 0 50.5px 0;
 
 	.header__page-title {
 		display: flex;
 		height: 41px;
+
+		.header__badger-logo {
+			height: 40px;
+			width: 40px;
+		}
 
 		.header__badger-status {
 			display: flex;
@@ -48,11 +51,12 @@
 				font-weight: 500;
 				line-height: 123.5%;
 				color: #ffffff;
-				margin: 0;
+				margin-top: -2.5px;
 			}
 
 			a {
 				display: flex;
+				align-items: center;
 				position: static;
 				color: #a9731e;
 				width: 100px;
@@ -63,7 +67,13 @@
 				font-size: 12px;
 				line-height: 100%;
 				text-decoration: underline;
-				margin-top: 5px;
+				margin-top: -15px;
+
+				img {
+					height: 15px;
+					width: 15px;
+					margin-right: 2.5px;
+				}
 			}
 		}
 	}
