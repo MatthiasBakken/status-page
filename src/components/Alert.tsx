@@ -36,6 +36,21 @@ const months = [
   "December"
 ];
 
+const getTime = (date: Date): string => {
+  const dateTime = date;
+  const hours = dateTime.getUTCHours();
+  const minutes = dateTime.getUTCMinutes();
+  let time: string = `${hours}:${minutes}`;
+  if ( minutes < 10 && hours < 10 ) {
+    time = `0${hours}:0${minutes}`;
+  } else if ( minutes < 10 ) {
+    time = `${hours}:0${minutes}`;
+  } else if ( hours < 10 ) {
+    time = `0${hours}:${minutes}`;
+  }
+  return time;
+}
+
 const Alert: React.FC<IProps> = ( props ) => {
   console.log( props );
 
@@ -63,17 +78,8 @@ const Alert: React.FC<IProps> = ( props ) => {
         <div className={`${ALERT}events-container`}>
           {
             alert.events.map( ( alertEvent: IAlertEvents ): JSX.Element => {
+              const time = getTime( alertEvent.date );
               const date = alertEvent.date;
-              const hours = date.getUTCHours();
-              const minutes = date.getUTCMinutes();
-              let time: string = `${hours}:${minutes}`;
-              if ( minutes < 10 && hours < 10 ) {
-                time = `0${hours}:0${minutes}`;
-              } else if ( minutes < 10 ) {
-                time = `${hours}:0${minutes}`;
-              } else if ( hours < 10 ) {
-                time = `0${hours}:${minutes}`;
-              }
               return (
                 <div
                   key={alertEvent.id}
