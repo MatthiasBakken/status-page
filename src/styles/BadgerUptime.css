@@ -1,0 +1,26 @@
+.badger-uptime__container {
+  font-family: "IBM Plex Sans", sans-serif;
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+}
+.badger-uptime__container .badger-uptime__upper-content {
+  margin: 22px 0 15px 0;
+  color: #ffffff;
+}
+.badger-uptime__container .badger-uptime__upper-content .badger-uptime__title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 116.7%;
+  margin-bottom: 0px;
+}
+.badger-uptime__container .badger-uptime__upper-content .badger-uptime__description {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 150%;
+  margin-top: 10px;
+}
+
+/*# sourceMappingURL=BadgerUptime.css.map */

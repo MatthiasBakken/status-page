@@ -4,6 +4,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import Header from "./components/Header";
 import Alert from "./components/Alert";
 import ExperienceIssue from "./components/ExperienceIssue";
+import BadgerUptime from './components/BadgerUptime';
 
 import { IInitialState } from "./interfaces/interfaces";
 
@@ -57,8 +58,7 @@ function App () {
       <Header />
       <Alert alert={alert} />
       <ExperienceIssue />
-      <Switch>
-      </Switch>
+      <BadgerUptime />
     </div>
   );
 }
