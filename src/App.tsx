@@ -3,6 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 
 import Header from "./components/Header";
 import Alert from "./components/Alert";
+import ExperienceIssue from "./components/ExperienceIssue";
 
 import { IInitialState } from "./interfaces/interfaces";
 
@@ -32,14 +33,30 @@ const initialState: IInitialState = {
   ]
 };
 
+// Below is the real initial state. If no current issues, then show the following
+// {
+//     id: "s165ds-fls34fsd-fks986dj-fl21jdf",
+//     status: "Resolved",
+//     title: "No Current Issues",
+//     description: "Everything running as expected",
+//     events: [ {
+//       id: "s1d5ds-flsw4fsd-fks98ddj-fl2jdf",
+//       status: "Resolved",
+//       title: "No Current Issues",
+//       description: "Everything running as expected",
+//       date: new Date()
+//     } ]
+//   }
+
 function App () {
   
-  const [ alert, setAlert ] = useState(initialState)
+  const [ alert, setAlert ] = useState( initialState );
 
   return (
     <div className="App">
       <Header />
-      <Alert alert={alert}/>
+      <Alert alert={alert} />
+      <ExperienceIssue />
       <Switch>
       </Switch>
     </div>

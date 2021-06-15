@@ -36,7 +36,22 @@ const months = [
   "December"
 ];
 
-const Alert: React.FC<IProps> = (props) => {
+const getTime = (date: Date): string => {
+  const dateTime = date;
+  const hours = dateTime.getUTCHours();
+  const minutes = dateTime.getUTCMinutes();
+  let time: string = `${hours}:${minutes}`;
+  if ( minutes < 10 && hours < 10 ) {
+    time = `0${hours}:0${minutes}`;
+  } else if ( minutes < 10 ) {
+    time = `${hours}:0${minutes}`;
+  } else if ( hours < 10 ) {
+    time = `0${hours}:${minutes}`;
+  }
+  return time;
+}
+
+const Alert: React.FC<IProps> = ( props ) => {
   console.log( props );
 
   const [ alert, setAlert ] = useState( props.alert );
@@ -49,7 +64,7 @@ const Alert: React.FC<IProps> = (props) => {
 
   const statusTitleContainer = classNames( {
     'alert__status-title-container': true,
-    'alert__status-title-container-resolved': alert.events[ 0 ].status === "Resolved",
+    'alert__status-title-container-resolved': alert.status === "Resolved",
     'alert__status-title-container-notice': alert.events[ 0 ].status === "Notice"
   } );
 
@@ -63,32 +78,28 @@ const Alert: React.FC<IProps> = (props) => {
         <div className={`${ALERT}events-container`}>
           {
             alert.events.map( ( alertEvent: IAlertEvents ): JSX.Element => {
+              const time = getTime( alertEvent.date );
               const date = alertEvent.date;
-              const hours = date.getHours();
-              const minutes = date.getMinutes();
-              let time: string = `${hours}:${minutes}`;
-              if ( hours < 10 ) {
-                time = '0'.concat( time );
-              }
               return (
                 <div
                   key={alertEvent.id}
                   className={
-                  classNames( {
-                    'alert__event': true,
-                    'alert__event-resolved': alertEvent.status === "Resolved",
-                    'alert__event-notice': alertEvent.status === "Notice"
-                  } )}>
+                    classNames( {
+                      'alert__event': true,
+                      'alert__event-resolved': alertEvent.status === "Resolved",
+                      'alert__event-notice': alertEvent.status === "Notice"
+                    } )}>
                   <p>{alertEvent.description}</p>
-                  <p>{`${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()} @ ${time}`}</p>
+                  <p>{`${months[ date.getUTCMonth() ]} ${date.getUTCDate()}, ${date.getUTCFullYear()} @ ${time} UTC`}</p>
                 </div>
-              )}
+              );
+            }
             )
           }
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Alert;
