@@ -1,0 +1,69 @@
+.status-bar__container {
+	display: flex;
+	background: #2b2b2b;
+	height: 100%;
+	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2);
+	border-radius: 8px;
+	width: 80vw;
+	.status-bar__main {
+		.status-bar__endpoint-main-container {
+			display: flex;
+			width: 80vw;
+			justify-content: center;
+			align-items: center;
+			section {
+				display: flex;
+				align-items: center;
+				height: 30px;
+				width: 80vw;
+				margin: 22px 0 22px 22px;
+				h5 {
+					font-style: normal;
+					font-weight: 500;
+					font-size: 20px;
+					line-height: 133.4%;
+					color: #ffffff;
+				}
+				.show-sub-status {
+					color: #a9731e;
+				}
+				p {
+					color: #f2a52b;
+					font-style: normal;
+					font-weight: 500;
+					font-size: 12px;
+					display: flex;
+					align-items: center;
+					.arrow-up {
+						font-size: 16px;
+						margin: 0px 1px 0px 5px;
+					}
+					.arrow-down {
+						font-size: 16px;
+						margin: 0px 1px 0px 5px;
+					}
+				}
+			}
+			.status-bar__error-icon {
+				color: red;
+				padding: 20px;
+			}
+			.status-bar__check-icon {
+				color: #74d189;
+				padding: 20px;
+			}
+		}
+		.status-bar__sub {
+			max-height: 100vh;
+			overflow: scroll;
+		}
+		.status-bar__sub-hidden {
+			max-height: 0;
+			overflow: hidden;
+			/* setting up my transition */
+			-webkit-transition: max-height 0.5s;
+			-moz-transition: max-height 0.5s;
+			transition: max-height 0.5s;
+		}
+	}
+}
