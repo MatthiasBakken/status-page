@@ -18,16 +18,32 @@ export type TContract = { name?: string; error?: boolean; date?: Date; results?:
 
 export type TApi = { name?: string; error?: boolean; date?: Date; results?: { isError?: boolean; name?: string; result?: string; error?: string; }[]; };
 
-export type TSubgraph = { name?: string; date?: Date; error?: boolean; results?: { data?: { users?: { __typename: string; id: string; settBalances: { __typename: string; id: string; }[]; }[]; setts: { __typename: string; id: string; name: string; symbol: string; token: { __typename: string; id: string; }; }[]; }[]; loading?: boolean; networkStatus?: number; errors: { locations: { line: number; column: number; }[]; message: string; }[] }[]; };
+export type TSubgraph = { name?: string; date?: Date; error?: boolean; results?: { data?: { users?: { __typename: string; id: string; settBalances: { __typename: string; id: string; }[]; }[]; setts: { __typename: string; id: string; name: string; symbol: string; token: { __typename: string; id: string; }; }[]; }[]; loading?: boolean; networkStatus?: number; errors?: { locations: { line: number; column: number; }[]; message: string; }[] }[]; };
+
+export interface IProviderProps {
+  provider?: TProvider;
+}
+
+export interface IApiHealthProps {
+  api?: TApi;
+}
+
+export interface ISubgraphProps {
+  subgraph?: TSubgraph;
+}
+
+export interface IContractProps {
+  contract?: TContract;
+}
+
+
 
 export interface IHealthCheckProps {
-  name: string;
-  error: boolean;
-  date: Date;
-  providers?: TProvider;
-  contracts?: TContract;
+  name?: string;
+  provider?: TProvider;
   api?: TApi;
   subgraph?: TSubgraph;
+  contract?: TContract;
 }
 
 export interface IProviderRes {

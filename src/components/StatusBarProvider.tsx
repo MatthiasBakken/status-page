@@ -14,11 +14,11 @@ import '../styles/StatusBarMain.css';
 
 const STATUS = "status-bar__";
 
-const StatusBarMain: React.FC<IHealthCheckProps> = ( props ) => {
+const StatusBarProvider: React.FC<IHealthCheckProps> = ( props ) => {
 
   const [ statusSub, setStatusSub ] = useState( false );
 
-  const { name, provider, api, subgraph, contract } = props;
+  const { provider } = props;
 
   console.log('props', props)
 
@@ -35,10 +35,13 @@ const StatusBarMain: React.FC<IHealthCheckProps> = ( props ) => {
       } )}>
         <div className={`${STATUS}endpoint-main-container`}>
           <section>
-            <h5>{name}</h5>
+            <h5>Providers</h5>
+            <p onClick={toggleSubStatusBars} className={classNames( {
+              'show-sub-status': statusSub
+            } )}>{statusSub ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />} all endpoints</p>
           </section>
           {
-            provider?.error && api?.error && subgraph?.error && contract?.error ? <ErrorOutlineIcon className={`${STATUS}error-icon`} /> : <CheckCircleOutlineIcon className={`${STATUS}check-icon`} />
+            provider?.error ? <ErrorOutlineIcon className={`${STATUS}error-icon`} /> : <CheckCircleOutlineIcon className={`${STATUS}check-icon`} />
           }
         </div>
         <div className={classNames( {
@@ -52,4 +55,4 @@ const StatusBarMain: React.FC<IHealthCheckProps> = ( props ) => {
   );
 };
 
-export default StatusBarMain;
+export default StatusBarProvider;
