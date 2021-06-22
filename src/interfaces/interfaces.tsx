@@ -21,29 +21,29 @@ export type TApi = { name?: string; error?: boolean; date?: Date; results?: { is
 export type TSubgraph = { name?: string; date?: Date; error?: boolean; results?: { data?: { users?: { __typename: string; id: string; settBalances: { __typename: string; id: string; }[]; }[]; setts: { __typename: string; id: string; name: string; symbol: string; token: { __typename: string; id: string; }; }[]; }[]; loading?: boolean; networkStatus?: number; errors?: { locations: { line: number; column: number; }[]; message: string; }[] }[]; };
 
 export interface IProviderProps {
-  provider?: TProvider;
+  provider: TProvider;
 }
 
 export interface IApiHealthProps {
-  api?: TApi;
+  api: TApi;
 }
 
 export interface ISubgraphProps {
-  subgraph?: TSubgraph;
+  subgraph: TSubgraph;
 }
 
 export interface IContractProps {
-  contract?: TContract;
+  contract: TContract;
 }
 
 
 
 export interface IHealthCheckProps {
-  name?: string;
-  provider?: TProvider;
-  api?: TApi;
-  subgraph?: TSubgraph;
-  contract?: TContract;
+  name: string;
+  provider: TProvider;
+  api: TApi;
+  subgraph: TSubgraph;
+  contract: TContract;
 }
 
 export interface IProviderRes {

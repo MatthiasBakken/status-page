@@ -113,14 +113,12 @@ const BadgerUptime = () => {
   const [ contractHealth, setContractHealth ] = useState( healthInitialState.contract );
 
   const getProviderHealth = async () => {
-    console.log('name: ', healthInitialState)
     await axios.get<IProviderRes>( `http://localhost:3000/v2/health/provider` )
       .then( providerRes => {
         let providersError = false;
         providerRes.data.results.forEach( ( result: { isError: boolean; name: string; result: string; } ) => {
           providersError = providersError || result.isError;
         } );
-        console.log( "provider: ", providerRes );
         setProviderHealth(
           {
             name: "Provider",
@@ -129,7 +127,6 @@ const BadgerUptime = () => {
             results: providerRes.data.results
           }
         );
-        console.log( 'healthStateProvider', providerHealth );
         return getApiHealth();
       } )
       .catch( err => {
@@ -138,14 +135,12 @@ const BadgerUptime = () => {
   };
 
   const getApiHealth = async () => {
-    console.log('name: ', healthInitialState.name)
     await axios.get<IApiRes>( `http://localhost:3000/v2/health/api` )
       .then( apiRes => {
         let errors = false;
         apiRes.data.results.forEach( result => {
           errors = errors || result.isError;
         } );
-        console.log( "api: ", apiRes );
         setApiHealth(
           {
             name: "APIs",
@@ -154,7 +149,6 @@ const BadgerUptime = () => {
             results: apiRes.data.results
           }
         );
-        console.log( 'healthStateAPI', apiHealth );
         return getSubgraphHealth();
       } )
       .catch( err => {
@@ -163,7 +157,6 @@ const BadgerUptime = () => {
   };
   
   const getSubgraphHealth = async () => {
-    console.log('name: ', healthInitialState.name)
     axios.get<ISubgraphRes>( `http://localhost:3000/v2/health/subgraph` )
       .then( subgraphRes => {
         let subgraphErrors = false;
@@ -172,7 +165,6 @@ const BadgerUptime = () => {
             subgraphErrors = subgraphErrors || true;
           }
         } );
-        console.log( "subgraph: ", subgraphRes );
         setSubgraphHealth(
           {
             name: "Subgraphs",
@@ -180,8 +172,7 @@ const BadgerUptime = () => {
             error: subgraphErrors,
             results: subgraphRes.data.results
           }
-        );
-        console.log( 'healthStateSubgraph', subgraphHealth );
+        );;
         return getContractHealth();
       } )
       .catch( err => {
@@ -190,7 +181,6 @@ const BadgerUptime = () => {
   };
 
   const getContractHealth = async () => {
-    console.log('name: ', healthInitialState.name)
     axios.get<IContractRes>( `http://localhost:3000/v2/health/contract` )
       .then( contractRes => {
         let bscError = false;
@@ -232,7 +222,6 @@ const BadgerUptime = () => {
             results: contractRes.data.results
           }
         );
-        console.log( "contractHealthState: ", contractHealth );
       } )
       .catch( err => {
         console.error( err.message );
@@ -251,10 +240,10 @@ const BadgerUptime = () => {
       </div>
       <div className={`${UPTIME}status-container`}>
         <StatusBarMain name={"Badger Health (Providers, Contracts, API, Subgraphs)"} provider={providerHealth} api={apiHealth} subgraph={subgraphHealth} contract={contractHealth} />
-        <StatusBarProvider name={"Providers"} provider={providerHealth} />
-        <StatusBarApi name={"API"} api={apiHealth} />
-        <StatusBarSubgraph name={"Subgraphs"} subgraph={subgraphHealth} />
-        <StatusBarContract name={"Contracts"} contract={contractHealth} />
+        <StatusBarProvider provider={providerHealth} />
+        <StatusBarApi api={apiHealth} />
+        <StatusBarSubgraph subgraph={subgraphHealth} />
+        <StatusBarContract contract={contractHealth} />
       </div>
     </div>
   );

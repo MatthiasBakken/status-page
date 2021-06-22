@@ -7,20 +7,20 @@ import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
 import StatusBarSub from "./StatusBarSub";
-import { IHealthCheckProps } from "../interfaces/interfaces";
+import { IProviderProps } from '../interfaces/interfaces';
 
 import '../styles/StatusBarMain.css';
 
 
 const STATUS = "status-bar__";
 
-const StatusBarProvider: React.FC<IHealthCheckProps> = ( props ) => {
+const StatusBarProvider: React.FC<IProviderProps> = ( props ) => {
 
   const [ statusSub, setStatusSub ] = useState( false );
 
   const { provider } = props;
 
-  console.log('props', props)
+  console.log('props provider', props)
 
   const toggleSubStatusBars = () => {
     setStatusSub( !statusSub );
