@@ -76,5 +76,8 @@
   margin-right: 5px;
   font-size: 14px;
 }
+.header__container .header__sub-button:hover {
+  cursor: pointer;
+}
 
 /*# sourceMappingURL=Header.css.map */

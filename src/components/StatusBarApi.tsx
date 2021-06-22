@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import classNames from "classnames";
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
@@ -18,9 +18,27 @@ const StatusBarApi: React.FC<IApiHealthProps> = ( props ) => {
 
   const [ statusSub, setStatusSub ] = useState( false );
 
+  const [ subState, setSubState ] = useState( [
+    {
+      error: false,
+      name: ""
+    }
+  ] );
+
   const {api} = props;
 
-  console.log('props api', props)
+  console.log( 'props api', props )
+  
+  useEffect( () => {
+    let tempArr: { error: boolean; name: string;}[] = [];
+    props.api.results.forEach( res => {
+      tempArr.push( {
+        error: res.isError,
+        name: res.name
+      } );
+    } );
+    setSubState( tempArr );
+  }, [props.api])
 
   const toggleSubStatusBars = () => {
     setStatusSub( !statusSub );
@@ -48,7 +66,7 @@ const StatusBarApi: React.FC<IApiHealthProps> = ( props ) => {
           'status-bar__sub': statusSub,
           'status-bar__sub-hidden': !statusSub
         } )}>
-          <StatusBarSub />
+          <StatusBarSub {...subState}/>
         </div>
       </div>
     </div>

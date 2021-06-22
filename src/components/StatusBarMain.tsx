@@ -27,9 +27,7 @@ const StatusBarMain: React.FC<IHealthCheckProps> = ( props ) => {
   };
 
   return (
-    <div className={classNames( {
-      'status-bar__container': true
-    } )}>
+    <div className={`${STATUS}container ${STATUS}container-top`}>
       <div className={classNames( {
         'status-bar__main': true
       } )}>
@@ -45,7 +43,6 @@ const StatusBarMain: React.FC<IHealthCheckProps> = ( props ) => {
           'status-bar__sub': statusSub,
           'status-bar__sub-hidden': !statusSub
         } )}>
-          <StatusBarSub />
         </div>
       </div>
     </div>

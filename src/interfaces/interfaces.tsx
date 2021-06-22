@@ -12,13 +12,13 @@ export interface IInitialState {
   }[]
 };
 
-export type TProvider = { name?: string; error?: boolean; date?: Date; results?: { isError?: boolean; name?: string; result?: string }[]; };
+export type TProvider = { name: string; error: boolean; date: Date; results: { isError: boolean; name: string; result: string }[]; };
 
-export type TContract = { name?: string; error?: boolean; date?: Date; results?: { chain?: string; results?: { address?: string; name?: string; error?: boolean; }[]; }[]; }
+export type TContract = { name: string; error: boolean; date: Date; results: { chain: string; contractResults: { address: string; error: { isError: boolean; }; name: string; }[]; }[]; }
 
-export type TApi = { name?: string; error?: boolean; date?: Date; results?: { isError?: boolean; name?: string; result?: string; error?: string; }[]; };
+export type TApi = { name: string; error: boolean; date: Date; results: { isError: boolean; name: string; result: string; error: string; }[]; };
 
-export type TSubgraph = { name?: string; date?: Date; error?: boolean; results?: { data?: { users?: { __typename: string; id: string; settBalances: { __typename: string; id: string; }[]; }[]; setts: { __typename: string; id: string; name: string; symbol: string; token: { __typename: string; id: string; }; }[]; }[]; loading?: boolean; networkStatus?: number; errors?: { locations: { line: number; column: number; }[]; message: string; }[] }[]; };
+export type TSubgraph = { date: Date; error: boolean; name: string; results: { isError: boolean; result: { data: {}; loading: boolean; networkStatus: number; }; subgraph: { name: string; }; }[]; };
 
 export interface IProviderProps {
   provider: TProvider;
@@ -36,7 +36,10 @@ export interface IContractProps {
   contract: TContract;
 }
 
-
+export interface IStatusBarSub {
+  error: boolean;
+  name: string;
+}
 
 export interface IHealthCheckProps {
   name: string;
@@ -81,25 +84,21 @@ export interface IApiRes {
     isError: boolean;
     name: string;
     result: string;
-    error?: string;
+    error: string;
   }[]
 };
 export interface ISubgraphRes {
   dateTime: Date;
   name: string;
   results: {
-    data: {
-      users: { __typename: string; id: string; settBalances: { __typename: string; id: string; }[] }[];
-      setts: { __typename: string; id: string; name: string; symbol: string; token: { __typename: string; id: string; } }[];
-    }[]
-    loading: boolean;
-    networkStatus: number;
-    errors: {
-      locations: {
-        line: number;
-        column: number;
-      }[];
-      message: string;
-    }[]
+    isError: boolean;
+    result: {
+      data: {};
+      loading: boolean;
+      networkStatus: number;
+    };
+    subgraph: {
+      name: string;
+    }
   }[]
 };

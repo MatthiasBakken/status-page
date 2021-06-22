@@ -47,42 +47,15 @@ const healthInitialState: IHealthCheckProps = {
     error: false,
     results: [
       {
-        data: [
-          {
-            users: [
-              {
-                __typename: "",
-                id: "",
-                settBalances: [
-                  {
-                    __typename: "",
-                    id: ""
-                  }
-                ]
-              }
-            ],
-            setts: [
-              {
-                __typename: "",
-                id: "",
-                name: "",
-                symbol: "",
-                token: {
-                  __typename: "",
-                  id: ""
-                }
-              }
-            ],
-          },
-        ],
-        loading: false,
-        networkStatus: 0,
-        errors: [
-          {
-            locations: [ { line: 0, column: 0 } ],
-            message: ""
-          }
-        ]
+        isError: false,
+        result: {
+          data: {},
+          loading: false,
+          networkStatus: 0
+        },
+        subgraph: {
+          name: ""
+        }
       }
     ]
   },
@@ -93,11 +66,13 @@ const healthInitialState: IHealthCheckProps = {
     results: [
       {
         chain: "",
-        results: [
+        contractResults: [
           {
             address: "",
-            name: "",
-            error: false
+            error: {
+              isError: false
+            },
+            name: ""
           }
         ]
       }
@@ -160,9 +135,10 @@ const BadgerUptime = () => {
     axios.get<ISubgraphRes>( `http://localhost:3000/v2/health/subgraph` )
       .then( subgraphRes => {
         let subgraphErrors = false;
-        subgraphRes.data.results.forEach( result => {
-          if ( result.errors ) {
-            subgraphErrors = subgraphErrors || true;
+        console.log('subgraph res: ', subgraphRes.data)
+        subgraphRes.data.results.forEach( res => {
+          if ( res.isError ) {
+            subgraphErrors = true;
           }
         } );
         setSubgraphHealth(

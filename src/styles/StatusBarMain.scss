@@ -1,9 +1,17 @@
+.status-bar__container-top {
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+}
+.status-bar__container-bottom {
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
+	margin-bottom: 30px;
+}
 .status-bar__container {
 	display: flex;
 	background: #2b2b2b;
 	height: 100%;
 	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 3px rgba(0, 0, 0, 0.2);
-	border-radius: 8px;
 	width: 80vw;
 	.status-bar__main {
 		.status-bar__endpoint-main-container {

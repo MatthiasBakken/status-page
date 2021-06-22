@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import classNames from "classnames";
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
@@ -18,7 +18,33 @@ const StatusBarContract: React.FC<IContractProps> = ( props ) => {
 
   const [ statusSub, setStatusSub ] = useState( false );
 
+  const [ subState, setSubState ] = useState( [
+    {
+      error: false,
+      name: ""
+    }
+  ] );
+
   const { contract } = props;
+
+  useEffect( () => {
+    let tempArr: { error: boolean; name: string; }[] = [];
+    props.contract.results[ 0 ].contractResults.forEach( res => {
+      tempArr.push( {
+        error: res.error.isError,
+        name: res.name
+      } );
+    } );
+    if ( props.contract.results[ 1 ] ) {
+      props.contract.results[ 1 ].contractResults.forEach( res => {
+      tempArr.push( {
+        error: res.error.isError,
+        name: res.name
+      } );
+    } );
+    }
+    setSubState( tempArr );
+  }, [ props.contract ] );
 
   console.log('props contract', props)
 
@@ -27,9 +53,7 @@ const StatusBarContract: React.FC<IContractProps> = ( props ) => {
   };
 
   return (
-    <div className={classNames( {
-      'status-bar__container': true
-    } )}>
+    <div className={`${STATUS}container ${STATUS}container-bottom`}>
       <div className={classNames( {
         'status-bar__main': true
       } )}>
@@ -48,7 +72,7 @@ const StatusBarContract: React.FC<IContractProps> = ( props ) => {
           'status-bar__sub': statusSub,
           'status-bar__sub-hidden': !statusSub
         } )}>
-          <StatusBarSub />
+          <StatusBarSub {...subState} />
         </div>
       </div>
     </div>

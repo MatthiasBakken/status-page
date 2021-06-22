@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import classNames from "classnames";
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
@@ -18,9 +18,27 @@ const StatusBarSubgraph: React.FC<ISubgraphProps> = ( props ) => {
 
   const [ statusSub, setStatusSub ] = useState( false );
 
+  const [ subState, setSubState ] = useState( [
+    {
+      error: false,
+      name: ""
+    }
+  ] );
+
   const { subgraph } = props;
 
-  console.log('props subgraph', props)
+  console.log( 'props subgraph', props )
+  
+  useEffect( () => {
+    let tempArr: { error: boolean; name: string;}[] = [];
+    props.subgraph.results.forEach( res => {
+      tempArr.push( {
+        error: res.isError,
+        name: res.subgraph.name
+      } );
+    } );
+    setSubState( tempArr );
+  }, [ props.subgraph ] );
 
   const toggleSubStatusBars = () => {
     setStatusSub( !statusSub );
@@ -38,7 +56,7 @@ const StatusBarSubgraph: React.FC<ISubgraphProps> = ( props ) => {
             <h5>Subgraphs</h5>
             <p onClick={toggleSubStatusBars} className={classNames( {
               'show-sub-status': statusSub
-            } )}>{statusSub ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />} all endpoints</p>
+            } )}>{statusSub ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />} all subgraphs</p>
           </section>
           {
             subgraph?.error ? <ErrorOutlineIcon className={`${STATUS}error-icon`} /> : <CheckCircleOutlineIcon className={`${STATUS}check-icon`} />
@@ -48,7 +66,7 @@ const StatusBarSubgraph: React.FC<ISubgraphProps> = ( props ) => {
           'status-bar__sub': statusSub,
           'status-bar__sub-hidden': !statusSub
         } )}>
-          <StatusBarSub />
+          <StatusBarSub {...subState} />
         </div>
       </div>
     </div>
