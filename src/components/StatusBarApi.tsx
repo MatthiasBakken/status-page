@@ -7,7 +7,7 @@ import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
 import StatusBarSub from "./StatusBarSub";
-import { IApiHealthProps } from '../interfaces/interfaces';
+import { IApiHealthProps,  TStatusBarSub } from '../interfaces/interfaces';
 
 import '../styles/StatusBarMain.css';
 
@@ -18,7 +18,7 @@ const StatusBarApi: React.FC<IApiHealthProps> = ( props ) => {
 
   const [ statusSub, setStatusSub ] = useState( false );
 
-  const [ subState, setSubState ] = useState( [
+  const [ subState, setSubState ] = useState<TStatusBarSub[]>( [
     {
       error: false,
       name: ""
@@ -26,8 +26,6 @@ const StatusBarApi: React.FC<IApiHealthProps> = ( props ) => {
   ] );
 
   const {api} = props;
-
-  console.log( 'props api', props )
   
   useEffect( () => {
     let tempArr: { error: boolean; name: string;}[] = [];
@@ -46,7 +44,9 @@ const StatusBarApi: React.FC<IApiHealthProps> = ( props ) => {
 
   return (
     <div className={classNames( {
-      'status-bar__container': true
+      'status-bar__container': true,
+      'status-bar__container-error': api.error,
+      'status-bar__container-ok': !api.error
     } )}>
       <div className={classNames( {
         'status-bar__main': true
@@ -66,7 +66,7 @@ const StatusBarApi: React.FC<IApiHealthProps> = ( props ) => {
           'status-bar__sub': statusSub,
           'status-bar__sub-hidden': !statusSub
         } )}>
-          <StatusBarSub {...subState}/>
+          <StatusBarSub subState={subState}/>
         </div>
       </div>
     </div>

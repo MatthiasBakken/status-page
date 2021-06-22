@@ -7,7 +7,7 @@ import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
 import StatusBarSub from "./StatusBarSub";
-import { ISubgraphProps } from "../interfaces/interfaces";
+import { ISubgraphProps,  TStatusBarSub } from "../interfaces/interfaces";
 
 import '../styles/StatusBarMain.css';
 
@@ -18,7 +18,7 @@ const StatusBarSubgraph: React.FC<ISubgraphProps> = ( props ) => {
 
   const [ statusSub, setStatusSub ] = useState( false );
 
-  const [ subState, setSubState ] = useState( [
+  const [ subState, setSubState ] = useState<TStatusBarSub[]>( [
     {
       error: false,
       name: ""
@@ -26,8 +26,6 @@ const StatusBarSubgraph: React.FC<ISubgraphProps> = ( props ) => {
   ] );
 
   const { subgraph } = props;
-
-  console.log( 'props subgraph', props )
   
   useEffect( () => {
     let tempArr: { error: boolean; name: string;}[] = [];
@@ -46,7 +44,9 @@ const StatusBarSubgraph: React.FC<ISubgraphProps> = ( props ) => {
 
   return (
     <div className={classNames( {
-      'status-bar__container': true
+      'status-bar__container': true,
+      'status-bar__container-error': subgraph.error,
+      'status-bar__container-ok': !subgraph.error
     } )}>
       <div className={classNames( {
         'status-bar__main': true
@@ -66,7 +66,7 @@ const StatusBarSubgraph: React.FC<ISubgraphProps> = ( props ) => {
           'status-bar__sub': statusSub,
           'status-bar__sub-hidden': !statusSub
         } )}>
-          <StatusBarSub {...subState} />
+          <StatusBarSub subState={subState} />
         </div>
       </div>
     </div>

@@ -41,6 +41,15 @@ export interface IStatusBarSub {
   name: string;
 }
 
+export type TStatusBarSub = {
+  error: boolean;
+  name: string;
+}
+
+export interface IStatusBarSubProps {
+  subState: TStatusBarSub[]
+}
+
 export interface IHealthCheckProps {
   name: string;
   provider: TProvider;

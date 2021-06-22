@@ -7,6 +7,12 @@
 	border-bottom-right-radius: 8px;
 	margin-bottom: 30px;
 }
+.status-bar__container-error {
+	border-left: 8px solid #f2a52b;
+}
+.status-bar__container-ok {
+	border-left: 8px solid #74d189;
+}
 .status-bar__container {
 	display: flex;
 	background: #2b2b2b;
@@ -53,7 +59,7 @@
 				}
 			}
 			.status-bar__error-icon {
-				color: red;
+				color: #f2a52b;
 				padding: 20px;
 			}
 			.status-bar__check-icon {

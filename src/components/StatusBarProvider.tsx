@@ -7,7 +7,7 @@ import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
 import StatusBarSub from "./StatusBarSub";
-import { IProviderProps } from '../interfaces/interfaces';
+import { IProviderProps,  TStatusBarSub } from '../interfaces/interfaces';
 
 import '../styles/StatusBarMain.css';
 
@@ -18,7 +18,7 @@ const StatusBarProvider: React.FC<IProviderProps> = ( props ) => {
 
   const [ statusSub, setStatusSub ] = useState( false );
 
-  const [ subState, setSubState ] = useState( [
+  const [ subState, setSubState ] = useState<TStatusBarSub[]>( [
     {
       error: false,
       name: ""
@@ -26,8 +26,6 @@ const StatusBarProvider: React.FC<IProviderProps> = ( props ) => {
   ] );
 
   const { provider } = props;
-
-  console.log( 'props provider', props )
   
   useEffect( () => {
     let tempArr: { error: boolean; name: string;}[] = [];
@@ -46,7 +44,9 @@ const StatusBarProvider: React.FC<IProviderProps> = ( props ) => {
 
   return (
     <div className={classNames( {
-      'status-bar__container': true
+      'status-bar__container': true,
+      'status-bar__container-error': provider.error,
+      'status-bar__container-ok': !provider.error
     } )}>
       <div className={classNames( {
         'status-bar__main': true
@@ -56,7 +56,7 @@ const StatusBarProvider: React.FC<IProviderProps> = ( props ) => {
             <h5>Providers</h5>
             <p onClick={toggleSubStatusBars} className={classNames( {
               'show-sub-status': statusSub
-            } )}>{statusSub ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />} all endpoints</p>
+            } )}>{statusSub ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />} all providers</p>
           </section>
           {
             provider?.error ? <ErrorOutlineIcon className={`${STATUS}error-icon`} /> : <CheckCircleOutlineIcon className={`${STATUS}check-icon`} />
@@ -66,7 +66,7 @@ const StatusBarProvider: React.FC<IProviderProps> = ( props ) => {
           'status-bar__sub': statusSub,
           'status-bar__sub-hidden': !statusSub
         } )}>
-          <StatusBarSub {...subState} />
+          <StatusBarSub subState={subState} />
         </div>
       </div>
     </div>

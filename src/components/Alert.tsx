@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -52,9 +52,8 @@ const getTime = (date: Date): string => {
 }
 
 const Alert: React.FC<IProps> = ( props ) => {
-  console.log( props );
 
-  const [ alert, setAlert ] = useState( props.alert );
+  const [ alert ] = useState( props.alert );
 
   const alertContainer = classNames( {
     'alert__container-notice': alert.status === 'Notice',
@@ -65,7 +64,7 @@ const Alert: React.FC<IProps> = ( props ) => {
   const statusTitleContainer = classNames( {
     'alert__status-title-container': true,
     'alert__status-title-container-resolved': alert.status === "Resolved",
-    'alert__status-title-container-notice': alert.events[ 0 ].status === "Notice"
+    'alert__status-title-container-notice': alert.status === "Notice"
   } );
 
   return (

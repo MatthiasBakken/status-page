@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 // import { Route, Switch, Redirect } from 'react-router-dom';
 
 import Header from "./components/Header";
@@ -37,7 +37,7 @@ import './styles/App.css';
 // Below is the real initial state. If no current issues, then show the following
 const initialState: IInitialState = {
   id: "s165ds-fls34fsd-fks986dj-fl21jdf",
-  status: "Resolved",
+  status: "Notice",
   title: "Alert feature coming to a status page near you!",
   description: "Everything running as expected",
   events: [ {
@@ -51,7 +51,7 @@ const initialState: IInitialState = {
 
 function App () {
   
-  const [ alert, setAlert ] = useState( initialState );
+  const [ alert ] = useState( initialState );
 
   return (
     <div className="App">

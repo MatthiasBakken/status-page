@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 
 import classNames from "classnames";
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
-import StatusBarSub from "./StatusBarSub";
 import { IHealthCheckProps } from "../interfaces/interfaces";
 
 import '../styles/StatusBarMain.css';
@@ -20,14 +17,17 @@ const StatusBarMain: React.FC<IHealthCheckProps> = ( props ) => {
 
   const { name, provider, api, subgraph, contract } = props;
 
-  console.log('props', props)
-
   const toggleSubStatusBars = () => {
     setStatusSub( !statusSub );
   };
 
   return (
-    <div className={`${STATUS}container ${STATUS}container-top`}>
+    <div className={classNames( {
+      'status-bar__container': true,
+      'status-bar__container-top': true,
+      'status-bar__container-error': provider?.error && api?.error && subgraph?.error && contract?.error,
+      'status-bar__container-ok': !(provider?.error && api?.error && subgraph?.error && contract?.error)
+    }) }>
       <div className={classNames( {
         'status-bar__main': true
       } )}>

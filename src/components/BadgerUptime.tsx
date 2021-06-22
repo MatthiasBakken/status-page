@@ -135,7 +135,6 @@ const BadgerUptime = () => {
     axios.get<ISubgraphRes>( `http://localhost:3000/v2/health/subgraph` )
       .then( subgraphRes => {
         let subgraphErrors = false;
-        console.log('subgraph res: ', subgraphRes.data)
         subgraphRes.data.results.forEach( res => {
           if ( res.isError ) {
             subgraphErrors = true;
@@ -189,7 +188,6 @@ const BadgerUptime = () => {
         } ) => {
           ethError = ethError || result.error.isError;
         } );
-        console.log( "contract: ", contractRes );
         setContractHealth(
           {
             name: "Contracts",

@@ -1,3 +1,26 @@
-
+.status-sub__container {
+  height: 100%;
+  width: 100%;
+}
+.status-sub__container .status-sub__bar {
+  height: 74px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black;
+}
+.status-sub__container .status-sub__bar p {
+  color: white;
+  margin-left: 50px;
+}
+.status-sub__container .status-sub__bar .status-sub__error-icon {
+  color: #f2a52b;
+  margin-right: 20px;
+}
+.status-sub__container .status-sub__bar .status-sub__check-icon {
+  color: #74d189;
+  margin-right: 20px;
+}
 
 /*# sourceMappingURL=StatusBarSub.css.map */
