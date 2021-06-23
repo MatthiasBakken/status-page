@@ -2,7 +2,6 @@ import React from 'react';
 
 import badgerLogo from '../assets/badger_logo.png';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import RssFeedIcon from '@material-ui/icons/RssFeed';
 
 import '../styles/Header.css';
 
@@ -10,10 +9,6 @@ import '../styles/Header.css';
 const HEADER = "header__";
 
 const Header = () => {
-
-  const subscribeHandler = () :void => {
-    alert("This feature is coming soon")
-  }
 
   return (
     <div className={`${HEADER}container`} data-testid={`${HEADER}container`}>
@@ -24,9 +19,6 @@ const Header = () => {
           <a href="https://app.badger.finance/"><ArrowBackIcon className={`${HEADER}arrow-back`} /> Back to app</a>
         </span>
       </div>
-      <button className={`${HEADER}sub-button`} onClick={() => subscribeHandler()} data-testid={`${HEADER}subscribe-button`}>
-        <RssFeedIcon className={`${HEADER}rss-feed-svg`}/> SUBSCRIBE TO ALL UPDATES
-      </button>
     </div>
   )
 }
