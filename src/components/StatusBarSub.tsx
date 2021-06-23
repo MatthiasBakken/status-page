@@ -20,7 +20,7 @@ const StatusBarSub: React.FC<IStatusBarSubProps> = ( {subState, ...props} ) => {
 
   useEffect( () => {
     setSub( subState );
-  }, [props])
+  }, [props, subState])
 
   return (
     <div className={`${SUB}container`}>

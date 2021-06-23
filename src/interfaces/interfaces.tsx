@@ -1,17 +1,3 @@
-export interface IInitialState {
-  id: string;
-  status: string;
-  title: string;
-  description: string;
-  events: {
-    id: string;
-    status: string;
-    title: string;
-    description: string;
-    date: Date;
-  }[]
-};
-
 export type TProvider = { name: string; error: boolean; date: Date; results: { isError: boolean; name: string; result: string }[]; };
 
 export type TContract = { name: string; error: boolean; date: Date; results: { chain: string; contractResults: { address: string; error: { isError: boolean; }; name: string; }[]; }[]; }

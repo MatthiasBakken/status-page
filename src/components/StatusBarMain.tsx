@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import classNames from "classnames";
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
@@ -13,13 +13,7 @@ const STATUS = "status-bar__";
 
 const StatusBarMain: React.FC<IHealthCheckProps> = ( props ) => {
 
-  const [ statusSub, setStatusSub ] = useState( false );
-
   const { name, provider, api, subgraph, contract } = props;
-
-  const toggleSubStatusBars = () => {
-    setStatusSub( !statusSub );
-  };
 
   return (
     <div className={classNames( {
@@ -40,8 +34,8 @@ const StatusBarMain: React.FC<IHealthCheckProps> = ( props ) => {
           }
         </div>
         <div className={classNames( {
-          'status-bar__sub': statusSub,
-          'status-bar__sub-hidden': !statusSub
+          'status-bar__sub': false,
+          'status-bar__sub-hidden': true
         } )}>
         </div>
       </div>

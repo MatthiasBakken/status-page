@@ -213,7 +213,7 @@ const BadgerUptime = () => {
 
   useEffect( () => {
     getProviderHealth();
-  }, [] );
+  });
 
   return (
     <div className={`${UPTIME}container`}>
