@@ -8,19 +8,32 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid black;
 }
-.status-sub__container .status-sub__bar p {
+.status-sub__container .status-sub__bar .status-sub__content {
+  height: 74px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 22px;
+}
+.status-sub__container .status-sub__bar .status-sub__content p {
   color: white;
-  margin-left: 50px;
+  margin-left: 20px;
 }
-.status-sub__container .status-sub__bar .status-sub__error-icon {
+.status-sub__container .status-sub__bar .status-sub__content .status-sub__error-icon {
   color: #f2a52b;
   margin-right: 20px;
 }
-.status-sub__container .status-sub__bar .status-sub__check-icon {
+.status-sub__container .status-sub__bar .status-sub__content .status-sub__check-icon {
   color: #74d189;
   margin-right: 20px;
+}
+.status-sub__container .status-sub__bar .status-sub__content-ok {
+  border-left: 4px solid #74d189;
+}
+.status-sub__container .status-sub__bar .status-sub__content-error {
+  border-left: 4px solid #f2a52b;
 }
 
 /*# sourceMappingURL=StatusBarSub.css.map */

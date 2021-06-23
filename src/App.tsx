@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 // import { Route, Switch, Redirect } from 'react-router-dom';
 
 import Header from "./components/Header";
-import Alert from "./components/Alert";
-import ExperienceIssue from "./components/ExperienceIssue";
+// import Alert from "./components/Alert";
+// import ExperienceIssue from "./components/ExperienceIssue";
 import BadgerUptime from './components/BadgerUptime';
 
 import { IInitialState } from './interfaces/interfaces';
@@ -56,8 +56,8 @@ function App () {
   return (
     <div className="App">
       <Header />
-      <Alert alert={alert} />
-      <ExperienceIssue />
+      {/* <Alert alert={alert} /> */}
+      {/* <ExperienceIssue /> */}
       <BadgerUptime />
     </div>
   );

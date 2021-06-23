@@ -2,7 +2,7 @@ import React from 'react';
 
 import badgerLogo from '../assets/badger_logo.png';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import RssFeedIcon from '@material-ui/icons/RssFeed';
+// import RssFeedIcon from '@material-ui/icons/RssFeed';
 
 import '../styles/Header.css';
 
@@ -24,9 +24,9 @@ const Header = () => {
           <a href="https://app.badger.finance/"><ArrowBackIcon className={`${HEADER}arrow-back`} /> Back to app</a>
         </span>
       </div>
-      <button className={`${HEADER}sub-button`} onClick={() => subscribeHandler()} data-testid={`${HEADER}subscribe-button`}>
+      {/* <button className={`${HEADER}sub-button`} onClick={() => subscribeHandler()} data-testid={`${HEADER}subscribe-button`}>
         <RssFeedIcon className={`${HEADER}rss-feed-svg`}/> SUBSCRIBE TO ALL UPDATES
-      </button>
+      </button> */}
     </div>
   )
 }

@@ -25,18 +25,21 @@ const StatusBarProvider: React.FC<IProviderProps> = ( props ) => {
     }
   ] );
 
+  const [ loadingState, setLoadingState ] = useState( props.loading );
+
   const { provider } = props;
   
   useEffect( () => {
-    let tempArr: { error: boolean; name: string;}[] = [];
+    let tempArr: { error: boolean; name: string; }[] = [];
     props.provider.results.forEach( res => {
       tempArr.push( {
         error: res.isError,
         name: res.name
-      } )
+      } );
     } );
-    setSubState(tempArr)
-  }, [ props.provider ] );
+    setSubState( tempArr );
+    setLoadingState( props.loading );
+  }, [ props.provider, props.loading ] );
 
   const toggleSubStatusBars = () => {
     setStatusSub( !statusSub );
@@ -54,9 +57,14 @@ const StatusBarProvider: React.FC<IProviderProps> = ( props ) => {
         <div className={`${STATUS}endpoint-main-container`}>
           <section>
             <h5>Providers</h5>
-            <p onClick={toggleSubStatusBars} className={classNames( {
-              'show-sub-status': statusSub
-            } )}>{statusSub ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />} all providers</p>
+            {
+              loadingState ?
+                <p style={{marginLeft: "5px", textAlign: "center"}}>loading...</p>
+                :
+                <p onClick={toggleSubStatusBars} className={classNames( {
+                  'show-sub-status': statusSub
+                } )}>{statusSub ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />} all providers</p>
+            }
           </section>
           {
             provider?.error ? <ErrorOutlineIcon className={`${STATUS}error-icon`} /> : <CheckCircleOutlineIcon className={`${STATUS}check-icon`} />

@@ -6,6 +6,7 @@ import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
 import '../styles/StatusBarSub.css';
+import classNames from 'classnames';
 
 
 const SUB = "status-sub__";
@@ -27,8 +28,14 @@ const StatusBarSub: React.FC<IStatusBarSubProps> = ( {subState, ...props} ) => {
         sub.map(sub => {
           return (
             <div key={sub.name} className={`${SUB}bar`}>
-              <p>{sub.name}</p>
-              {sub.error ? <ErrorOutlineIcon className={`${SUB}error-icon`} /> : <CheckCircleOutlineIcon className={`${SUB}check-icon`} />}
+              <div className={classNames( {
+                'status-sub__content': true,
+                'status-sub__content-ok': !sub.error,
+                'status-sub__content-error': sub.error
+              })}>
+                <p>{sub.name}</p>
+                {sub.error ? <ErrorOutlineIcon className={`${SUB}error-icon`} /> : <CheckCircleOutlineIcon className={`${SUB}check-icon`} />}
+              </div>
             </div>
           )
         })

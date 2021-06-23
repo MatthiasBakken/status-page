@@ -25,6 +25,8 @@ const StatusBarContract: React.FC<IContractProps> = ( props ) => {
     }
   ] );
 
+  const [ loadingState, setLoadingState ] = useState( props.loading );
+
   const { contract } = props;
 
   useEffect( () => {
@@ -37,14 +39,15 @@ const StatusBarContract: React.FC<IContractProps> = ( props ) => {
     } );
     if ( props.contract.results[ 1 ] ) {
       props.contract.results[ 1 ].contractResults.forEach( res => {
-      tempArr.push( {
-        error: res.error.isError,
-        name: res.name
+        tempArr.push( {
+          error: res.error.isError,
+          name: res.name
+        } );
       } );
-    } );
     }
     setSubState( tempArr );
-  }, [ props.contract ] );
+    setLoadingState( props.loading );
+  }, [ props.contract, props.loading ] );
 
   const toggleSubStatusBars = () => {
     setStatusSub( !statusSub );
@@ -63,9 +66,14 @@ const StatusBarContract: React.FC<IContractProps> = ( props ) => {
         <div className={`${STATUS}endpoint-main-container`}>
           <section>
             <h5>Contracts</h5>
-            <p onClick={toggleSubStatusBars} className={classNames( {
-              'show-sub-status': statusSub
-            } )}>{statusSub ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />} all contracts</p>
+            {
+              loadingState ?
+                <p style={{ marginLeft: "5px", textAlign: "center" }}>loading...</p>
+                :
+                <p onClick={toggleSubStatusBars} className={classNames( {
+                  'show-sub-status': statusSub
+                } )}>{statusSub ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />} all contracts</p>
+            }
           </section>
           {
             contract?.error ? <ErrorOutlineIcon className={`${STATUS}error-icon`} /> : <CheckCircleOutlineIcon className={`${STATUS}check-icon`} />

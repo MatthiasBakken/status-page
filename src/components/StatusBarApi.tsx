@@ -25,10 +25,12 @@ const StatusBarApi: React.FC<IApiHealthProps> = ( props ) => {
     }
   ] );
 
-  const {api} = props;
+  const [ loadingState, setLoadingState ] = useState( props.loading );
+
+  const { api } = props;
   
   useEffect( () => {
-    let tempArr: { error: boolean; name: string;}[] = [];
+    let tempArr: { error: boolean; name: string; }[] = [];
     props.api.results.forEach( res => {
       tempArr.push( {
         error: res.isError,
@@ -36,7 +38,8 @@ const StatusBarApi: React.FC<IApiHealthProps> = ( props ) => {
       } );
     } );
     setSubState( tempArr );
-  }, [props.api])
+    setLoadingState( props.loading );
+  }, [ props.api, props.loading ] );
 
   const toggleSubStatusBars = () => {
     setStatusSub( !statusSub );
@@ -54,9 +57,14 @@ const StatusBarApi: React.FC<IApiHealthProps> = ( props ) => {
         <div className={`${STATUS}endpoint-main-container`}>
           <section>
             <h5>API</h5>
-            <p onClick={toggleSubStatusBars} className={classNames( {
-              'show-sub-status': statusSub
-            } )}>{statusSub ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />} all endpoints</p>
+            {
+              loadingState ?
+                <p style={{ marginLeft: "5px", textAlign: "center" }}>loading...</p>
+                :
+                <p onClick={toggleSubStatusBars} className={classNames( {
+                  'show-sub-status': statusSub
+                } )}>{statusSub ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />} all endpoints</p>
+            }
           </section>
           {
             api?.error ? <ErrorOutlineIcon className={`${STATUS}error-icon`} /> : <CheckCircleOutlineIcon className={`${STATUS}check-icon`} />
@@ -66,7 +74,7 @@ const StatusBarApi: React.FC<IApiHealthProps> = ( props ) => {
           'status-bar__sub': statusSub,
           'status-bar__sub-hidden': !statusSub
         } )}>
-          <StatusBarSub subState={subState}/>
+          <StatusBarSub subState={subState} />
         </div>
       </div>
     </div>

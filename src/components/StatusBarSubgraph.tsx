@@ -25,10 +25,12 @@ const StatusBarSubgraph: React.FC<ISubgraphProps> = ( props ) => {
     }
   ] );
 
+  const [ loadingState, setLoadingState ] = useState( props.loading );
+
   const { subgraph } = props;
   
   useEffect( () => {
-    let tempArr: { error: boolean; name: string;}[] = [];
+    let tempArr: { error: boolean; name: string; }[] = [];
     props.subgraph.results.forEach( res => {
       tempArr.push( {
         error: res.isError,
@@ -36,7 +38,8 @@ const StatusBarSubgraph: React.FC<ISubgraphProps> = ( props ) => {
       } );
     } );
     setSubState( tempArr );
-  }, [ props.subgraph ] );
+    setLoadingState( props.loading );
+  }, [ props.subgraph, props.loading ] );
 
   const toggleSubStatusBars = () => {
     setStatusSub( !statusSub );
@@ -54,9 +57,14 @@ const StatusBarSubgraph: React.FC<ISubgraphProps> = ( props ) => {
         <div className={`${STATUS}endpoint-main-container`}>
           <section>
             <h5>Subgraphs</h5>
-            <p onClick={toggleSubStatusBars} className={classNames( {
-              'show-sub-status': statusSub
-            } )}>{statusSub ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />} all subgraphs</p>
+            {
+              loadingState ?
+                <p style={{ marginLeft: "5px", textAlign: "center" }}>loading...</p>
+                :
+                <p onClick={toggleSubStatusBars} className={classNames( {
+                  'show-sub-status': statusSub
+                } )}>{statusSub ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />} all subgraphs</p>
+            }
           </section>
           {
             subgraph?.error ? <ErrorOutlineIcon className={`${STATUS}error-icon`} /> : <CheckCircleOutlineIcon className={`${STATUS}check-icon`} />

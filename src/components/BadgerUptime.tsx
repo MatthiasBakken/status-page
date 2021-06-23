@@ -87,6 +87,11 @@ const BadgerUptime = () => {
   const [ subgraphHealth, setSubgraphHealth ] = useState( healthInitialState.subgraph );
   const [ contractHealth, setContractHealth ] = useState( healthInitialState.contract );
 
+  const [ providerLoading, setProviderLoading ] = useState( true );
+  const [ apiLoading, setApiLoading ] = useState( true );
+  const [ subgraphLoading, setSubgraphLoading ] = useState( true );
+  const [ contractLoading, setContractLoading ] = useState( true );
+
   const getProviderHealth = async () => {
     await axios.get<IProviderRes>( `http://localhost:3000/v2/health/provider` )
       .then( providerRes => {
@@ -102,6 +107,7 @@ const BadgerUptime = () => {
             results: providerRes.data.results
           }
         );
+        setProviderLoading( false );
         return getApiHealth();
       } )
       .catch( err => {
@@ -124,6 +130,7 @@ const BadgerUptime = () => {
             results: apiRes.data.results
           }
         );
+        setApiLoading( false );
         return getSubgraphHealth();
       } )
       .catch( err => {
@@ -147,7 +154,8 @@ const BadgerUptime = () => {
             error: subgraphErrors,
             results: subgraphRes.data.results
           }
-        );;
+        );
+        setSubgraphLoading( false );
         return getContractHealth();
       } )
       .catch( err => {
@@ -196,6 +204,7 @@ const BadgerUptime = () => {
             results: contractRes.data.results
           }
         );
+        setContractLoading( false );
       } )
       .catch( err => {
         console.error( err.message );
@@ -214,10 +223,10 @@ const BadgerUptime = () => {
       </div>
       <div className={`${UPTIME}status-container`}>
         <StatusBarMain name={"Badger Health (Providers, Contracts, API, Subgraphs)"} provider={providerHealth} api={apiHealth} subgraph={subgraphHealth} contract={contractHealth} />
-        <StatusBarProvider provider={providerHealth} />
-        <StatusBarApi api={apiHealth} />
-        <StatusBarSubgraph subgraph={subgraphHealth} />
-        <StatusBarContract contract={contractHealth} />
+        <StatusBarProvider provider={providerHealth} loading={providerLoading}/>
+        <StatusBarApi api={apiHealth} loading={apiLoading}/>
+        <StatusBarSubgraph subgraph={subgraphHealth} loading={subgraphLoading}/>
+        <StatusBarContract contract={contractHealth} loading={contractLoading}/>
       </div>
     </div>
   );

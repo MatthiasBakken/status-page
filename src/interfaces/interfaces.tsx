@@ -21,18 +21,22 @@ export type TApi = { name: string; error: boolean; date: Date; results: { isErro
 export type TSubgraph = { date: Date; error: boolean; name: string; results: { isError: boolean; result: { data: {}; loading: boolean; networkStatus: number; }; subgraph: { name: string; }; }[]; };
 
 export interface IProviderProps {
+  loading: boolean;
   provider: TProvider;
 }
 
 export interface IApiHealthProps {
+  loading: boolean;
   api: TApi;
 }
 
 export interface ISubgraphProps {
+  loading: boolean;
   subgraph: TSubgraph;
 }
 
 export interface IContractProps {
+  loading: boolean;
   contract: TContract;
 }
 
